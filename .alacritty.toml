@@ -1,0 +1,48 @@
+# Alacritty Configuration File
+
+[font]
+# 'Monaspace Neon' nerd font
+# Should be installed using `brew tap homebrew/cask-fonts && brew install --cask font-monospace-nerd-font`
+normal = { family = "MonaspiceNe Nerd Font", style = "Regular" }
+bold = { style = "Medium" }
+size = 13.3
+
+[cursor]
+style = { shape = "Underline" }
+
+# Kanagawa Dragon theme from https://github.com/rebelot/kanagawa.nvim
+[colors.primary]
+background = "#181616"
+foreground = "#c5c9c5"
+
+[colors.normal]
+black = "#0d0c0c"   # Standard black.
+red = "#c4746e"     # Standard red.
+green = "#8a9a7b"   # Standard green.
+yellow = "#c4b28a"  # Standard yellow.
+blue = "#8ba4b0"    # Standard blue.
+magenta = "#a292a3" # Standard magenta.
+cyan = "#8ea4a2"    # Standard cyan.
+white = "#C8C093"   # Standard white.
+
+[colors.bright]
+black = "#a6a69c"   # Bright black.
+red = "#E46876"     # Bright red.
+green = "#87a987"   # Bright green.
+yellow = "#E6C384"  # Bright yellow.
+blue = "#7FB4CA"    # Bright blue.
+magenta = "#938AA9" # Bright magenta.
+cyan = "#7AA89F"    # Bright cyan.
+white = "#c5c9c5"   # Bright white.
+
+[colors.selection]
+background = "#2D4F67" # Background color for selected text.
+foreground = "#C8C093" # Foreground color for selected text.
+
+[[colors.indexed_colors]]
+index = 16        # Indexed color 16.
+color = "#b6927b"
+
+[[colors.indexed_colors]]
+index = 17        # Indexed color 17.
+color = "#b98d7b"
