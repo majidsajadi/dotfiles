@@ -107,6 +107,7 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Configure key bindings for history search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '^R' history-incremental-search-backward
 
 # Load color definitions
 autoload -U colors

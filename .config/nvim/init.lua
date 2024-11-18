@@ -51,28 +51,12 @@ vim.opt.scrolloff = 10
 vim.opt.termguicolors = true
 
 -- [[ Keybindings ]]
--- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Open diagnostic [Q]uickfix list
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
-	desc = 'Open diagnostic [Q]uickfix list'
-})
-
--- Disable arrow keys in normal mode with custom messages
-vim.keymap.set('n', '<left>', '<cmd><CR>')
-vim.keymap.set('n', '<right>', '<cmd><CR>')
-vim.keymap.set('n', '<up>', '<cmd><CR>')
-vim.keymap.set('n', '<down>', '<cmd><CR>')
-
--- Keybinds for split window navigation
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- Keybinding to open file explorer
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic list'})
+vim.keymap.set('n', '<left>', '<cmd><CR>', { desc = 'Disable left arrow key' })
+vim.keymap.set('n', '<right>', '<cmd><CR>', { desc = 'Disable right arrow key' })
+vim.keymap.set('n', '<up>', '<cmd><CR>', { desc = 'Disable up arrow key' })
+vim.keymap.set('n', '<down>', '<cmd><CR>', { desc = 'Disable down arrow key' })
+vim.keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = 'Open file explorer' })
 
 -- [[ Autocommands ]]
 -- Highlight text when yanked (copied)
@@ -109,14 +93,15 @@ require('lazy').setup({
 
 			local builtin = require('telescope.builtin')
 
-			-- Search using live grep
-			vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-			-- Open file search (no preview)
-			vim.keymap.set('n', '<leader>ff', function()
-				builtin.find_files({
-					previewer = false
-				})
-			end, {})
+            vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search text' })
+            vim.keymap.set('n', '<leader>ff', function()
+                builtin.find_files({ 
+					-- no preview
+					previewer = false,
+					-- include dotfiles
+					hidden = true,
+			})
+            end, { desc = 'Search file' })
 		end
 	},
 	-- [[ Colorscheme ]]
@@ -192,39 +177,15 @@ require('lazy').setup({
 			vim.api.nvim_create_autocmd('LspAttach', {
 				group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
 				callback = function(event)
-					local opts = { buffer = event.buf }
+					vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { buffer = event.buf, desc = "Find references" })
+					vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { buffer = event.buf, desc = "Jump to the definition" })
+					vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, { buffer = event.buf, desc = "Jump to the implementation" })
 
-					-- Jump to the definition of the word under your cursor.
-					vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, opts)
-
-					-- Find references for the word under your cursor.
-					vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
-
-					-- Jump to the implementation of the word under your cursor.
-					vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, opts)
-
-					-- Jump to the type of the word under your cursor.
-					vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions, opts)
-
-					-- Fuzzy find all the symbols in your current document.
-					vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, opts)
-
-					-- Fuzzy find all the symbols in your current workspace.
-					vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, opts)
-
-					-- Rename the variable under your cursor.
-					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-
-					-- Execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate.
-					vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-
-					-- Goto Declaration (not Goto Definition).
-					vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, opts)
-
-					-- Add keybinding for formatting code
-					vim.keymap.set('n', '<F3>', function()
+					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = event.buf, desc = "Rename the variable" })
+					vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = event.buf, desc = "Execute a code action" })
+					vim.keymap.set('n', '<leader>fm', function()
 						vim.lsp.buf.format({ async = true })
-					end, opts)
+					end, { buffer = event.buf, desc = "Format code" })
 				end
 			})
 
@@ -294,33 +255,13 @@ require('lazy').setup({
 				},
 
 				mapping = cmp.mapping.preset.insert {
-					-- Select the [n]ext item
-					['<C-n>'] = cmp.mapping.select_next_item(),
-					-- Select the [p]revious item
-					['<C-p>'] = cmp.mapping.select_prev_item(),
-					-- Scroll the documentation window [b]ack / [f]orward
-					['<C-b>'] = cmp.mapping.scroll_docs(-4),
-					['<C-f>'] = cmp.mapping.scroll_docs(4),
-					-- Accept ([y]es) the completion.
-					['<C-y>'] = cmp.mapping.confirm {
-						select = true
-					},
-					-- Manually trigger a completion from nvim-cmp.
-					['<C-Space>'] = cmp.mapping.complete {},
-					-- Think of <c-l> as moving to the right of
-					-- <c-l> will move you to the right of each of the expansion locations.
-					['<C-l>'] = cmp.mapping(function()
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						end
-					end, { 'i', 's' }),
-					-- <c-h> is similar, except moving you backwards.
-					['<C-h>'] = cmp.mapping(function()
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						end
-					end, { 'i', 's' })
-
+					['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+					['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+					['<C-y>'] = cmp.mapping.confirm({ select = true }),
+					["<C-Space>"] = cmp.mapping.complete(),
+					['<up>'] = cmp.mapping.select_prev_item(cmp_select),
+					['<down>'] = cmp.mapping.select_next_item(cmp_select),
+					['<Enter>'] = cmp.mapping.confirm({ select = true }),
 				},
 				sources = { {
 					name = 'lazydev',
