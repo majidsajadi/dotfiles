@@ -5,16 +5,6 @@ set -e
 DOTFILES_DIR=~/dotfiles
 VSCODE_DIR="$HOME/Library/Application Support/Code/User"
 
-# Ensure Homebrew is installed
-if ! command -v brew &>/dev/null; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-# Run BrewFile (commented out as in original)
-if [ -f "$DOTFILES_DIR/Brewfile" ]; then
-    brew bundle --file="$DOTFILES_DIR/Brewfile"
-fi
-
 # Function to create symlink with backup
 create_symlink() {
   local source=$1
