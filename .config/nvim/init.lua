@@ -115,7 +115,16 @@ require('lazy').setup({
 			require('kanagawa').setup({
 				commentStyle = { italic = false },
 				keywordStyle = { italic = false },
-				background = { dark = "dragon", light = "lotus" }
+				background = { dark = "dragon", light = "lotus" },
+				colors = {
+					theme = {
+						all = {
+							ui = {
+								bg_gutter = "none"
+							}
+						}
+					}
+				},
 			})
 		end
 	},
