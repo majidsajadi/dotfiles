@@ -4,7 +4,6 @@
 	"workbench.editor.editorActionsLocation": "hidden",
 	"workbench.layoutControl.enabled": false,
 	"workbench.colorTheme": "Kanagawa Dragon",
-	"workbench.editor.showTabs": "single",
 	"breadcrumbs.enabled": false,
 	"editor.fontFamily": "'Monaspace Neon', monospace",
 	"editor.fontSize": 13,
@@ -37,6 +36,9 @@
 		"statusBar.background": "#181616",
 		"statusBar.border": "#282727",
 		"sideBar.border": "#282727",
-		"scrollbar.shadow": "#181616",
+		"scrollbar.shadow": "#181616"
+	},
+	"[dockerfile]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
 	}
 }

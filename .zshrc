@@ -114,7 +114,7 @@ autoload -U colors
 colors
 
 # Set Vim-like keybindings in Zsh
-bindkey -v
+# bindkey -v
 
 # ===============================
 # Aliases
