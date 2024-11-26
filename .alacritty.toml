@@ -16,33 +16,33 @@ background = "#181616"
 foreground = "#c5c9c5"
 
 [colors.normal]
-black = "#0d0c0c"   # Standard black.
-red = "#c4746e"     # Standard red.
-green = "#8a9a7b"   # Standard green.
-yellow = "#c4b28a"  # Standard yellow.
-blue = "#8ba4b0"    # Standard blue.
-magenta = "#a292a3" # Standard magenta.
-cyan = "#8ea4a2"    # Standard cyan.
-white = "#C8C093"   # Standard white.
+black = "#0d0c0c"
+red = "#c4746e"
+green = "#8a9a7b"
+yellow = "#c4b28a"
+blue = "#8ba4b0"
+magenta = "#a292a3"
+cyan = "#8ea4a2"
+white = "#C8C093"
 
 [colors.bright]
-black = "#a6a69c"   # Bright black.
-red = "#E46876"     # Bright red.
-green = "#87a987"   # Bright green.
-yellow = "#E6C384"  # Bright yellow.
-blue = "#7FB4CA"    # Bright blue.
-magenta = "#938AA9" # Bright magenta.
-cyan = "#7AA89F"    # Bright cyan.
-white = "#c5c9c5"   # Bright white.
+black = "#a6a69c"
+red = "#E46876"
+green = "#87a987"
+yellow = "#E6C384"
+blue = "#7FB4CA"
+magenta = "#938AA9"
+cyan = "#7AA89F"
+white = "#c5c9c5"
 
 [colors.selection]
-background = "#2D4F67" # Background color for selected text.
-foreground = "#C8C093" # Foreground color for selected text.
+background = "#2D4F67"
+foreground = "#C8C093"
 
 [[colors.indexed_colors]]
-index = 16        # Indexed color 16.
+index = 16
 color = "#b6927b"
 
 [[colors.indexed_colors]]
-index = 17        # Indexed color 17.
+index = 17
 color = "#b98d7b"

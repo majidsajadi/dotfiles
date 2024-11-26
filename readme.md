@@ -7,7 +7,7 @@ git clone https://github.com/majidsajadi/dotfiles.git ~/dotfiles
 
 cd ~/dotfiles
 
-# Optional: bundle Brewfile
+# Bundle Brewfile
 brew bundle --file="./Brewfile"
 
 # Symlink dotfiles

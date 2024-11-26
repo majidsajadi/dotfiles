@@ -7,6 +7,11 @@ DOTFILES_DIR="${HOME}/dotfiles"
 WORKSPACE_DIR="${HOME}/workspace"
 
 # Enable colored output for tools like `ls`
+
+# Load color definitions
+autoload -U colors
+colors
+
 export CLICOLOR=1
 
 # Set default editor and browser
@@ -109,13 +114,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^R' history-incremental-search-backward
 
-# Load color definitions
-autoload -U colors
-colors
-
-# Set Vim-like keybindings in Zsh
-# bindkey -v
-
 # ===============================
 # Aliases
 # ===============================
@@ -123,4 +121,3 @@ colors
 # Aliases for Neovim
 alias vi="nvim"
 alias vim="nvim"
-

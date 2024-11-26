@@ -1,20 +1,29 @@
 {
 	"window.commandCenter": false,
-	"workbench.activityBar.location": "hidden",
-	"workbench.editor.editorActionsLocation": "hidden",
-	"workbench.layoutControl.enabled": false,
-	"workbench.colorTheme": "Kanagawa Dragon",
 	"breadcrumbs.enabled": false,
+	"explorer.confirmDragAndDrop": false,
+	"explorer.confirmDelete": false,
+	"editor.cursorStyle": "line-thin",
 	"editor.fontFamily": "'Monaspace Neon', monospace",
 	"editor.fontSize": 13,
 	"editor.fontLigatures": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.lineNumbers": "relative",
 	"editor.minimap.enabled": false,
-	"explorer.confirmDragAndDrop": false,
-	"explorer.confirmDelete": false,
 	"editor.stickyScroll.enabled": false,
 	"editor.guides.indentation": true,
+	"workbench.activityBar.location": "hidden",
+	"workbench.editor.editorActionsLocation": "hidden",
+	"workbench.layoutControl.enabled": false,
+	"workbench.colorTheme": "Kanagawa Dragon",
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#181616",
+		"titleBar.inactiveBackground": "#181616",
+		"statusBar.background": "#181616",
+		"statusBar.border": "#282727",
+		"sideBar.border": "#282727",
+		"scrollbar.shadow": "#181616"
+	},
 	"[go]": {
 		"editor.defaultFormatter": "golang.go"
 	},
@@ -30,15 +39,13 @@
 	"[shellscript]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
-	"workbench.colorCustomizations": {
-		"titleBar.activeBackground": "#181616",
-		"titleBar.inactiveBackground": "#181616",
-		"statusBar.background": "#181616",
-		"statusBar.border": "#282727",
-		"sideBar.border": "#282727",
-		"scrollbar.shadow": "#181616"
-	},
 	"[dockerfile]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
+	},
+	"[sql]": {
+		"editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+	},
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
 	}
 }
