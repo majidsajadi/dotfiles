@@ -270,7 +270,7 @@ require('lazy').setup({
 					["<C-Space>"] = cmp.mapping.complete(),
 					['<up>'] = cmp.mapping.select_prev_item(cmp_select),
 					['<down>'] = cmp.mapping.select_next_item(cmp_select),
-					['<Enter>'] = cmp.mapping.confirm({ select = true }),
+					['<Tab>'] = cmp.mapping.confirm({ select = true }),
 				},
 				sources = { {
 					name = 'lazydev',
