@@ -1,18 +1,12 @@
-# User Identity
 [user]
-    # Sets your Git username. This will appear in your commits.
-    name = majidsajadi
+name = majidsajadi
+email = majidsajadi93@gmail.com
 
-    # Sets your email address. This should match the email associated with your GitHub or other Git hosting account.
-    email = majidsajadi93@gmail.com
+[init]
+defaultBranch = main
 
-# URL Shortcuts
+[pull]
+rebase = false
+
 [url "https://github.com/"]
-    # Replaces "gh:" with "https://github.com/" for easier repository access.
-    # Example: "git clone gh:username/repo" will be interpreted as "git clone https://github.com/username/repo".
-    insteadOf = gh:
-
-[url "https://github.com/majidsajadi/"]
-    # Replaces "msgh:" with "https://github.com/majidsajadi/" for personal repository shortcuts.
-    # Example: "git clone msgh:repo" will be interpreted as "git clone https://github.com/majidsajadi/repo".
-    insteadOf = msgh:
+insteadOf = gh:

@@ -1,49 +1,36 @@
 #!/usr/bin/env bash
-set -e
 
-# Configuration
-DOTFILES_DIR=~/dotfiles
+set -euo pipefail
+
+DOTFILES_DIR="$HOME/dotfiles"
 VSCODE_DIR="$HOME/Library/Application Support/Code/User"
 
-# Function to create symlink with backup
-create_symlink() {
-  local source=$1
-  local target=$2
+NONINTERACTIVE=1 brew bundle --file="$DOTFILES_DIR/Brewfile" --no-upgrade --verbose --no-lock
 
-  # Create target directory if it doesn't exist
-  target_dir=$(dirname "$target")
-  if [ ! -d "$target_dir" ]; then
-    echo "Creating directory: $target_dir"
-    mkdir -p "$target_dir"
-  fi
+links=(
+  "$DOTFILES_DIR/.zshrc:$HOME/.zshrc"
+  "$DOTFILES_DIR/.zprofile:$HOME/.zprofile"
+  "$DOTFILES_DIR/.zshenv:$HOME/.zshenv"
+  "$DOTFILES_DIR/.aliases:$HOME/.aliases"
+  "$DOTFILES_DIR/.gitconfig:$HOME/.gitconfig"
+  "$DOTFILES_DIR/.gitignore:$HOME/.gitignore"
+  "$DOTFILES_DIR/.editorconfig:$HOME/.editorconfig"
+  "$DOTFILES_DIR/.config/nvim:$HOME/.config/nvim"
+  "$DOTFILES_DIR/.config/ghostty:$HOME/.config/ghostty"
+  "$DOTFILES_DIR/.config/mise:$HOME/.config/mise"
+  "$DOTFILES_DIR/settings.json:$VSCODE_DIR/settings.json"
+)
 
-  # Check if source file exists
-  if [ ! -e "$source" ]; then
-    echo "SKIP: $source"
-    return
-  fi
+for entry in "${links[@]}"; do
+  source="${entry%%:*}"
+  target="${entry##*:}"
 
-  # Handle existing files/symlinks
   if [ -e "$target" ] || [ -L "$target" ]; then
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-      echo "SKIP: $target"
-      return
-    else
-      echo "REPLACE: $target to $target.backup"
-      mv "$target" "$target.backup"
-    fi
+    mv "$target" "$target.bac"
   fi
 
-  # Create symlink
-  echo "CREATE: $source -> $target"
-  ln -sf "$source" "$target"
-}
+  mkdir -p "$(dirname "$target")"
+  ln -sfn "$source" "$target"
+done
 
-create_symlink "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
-create_symlink "$DOTFILES_DIR/.alacritty.toml" "$HOME/.alacritty.toml"
-create_symlink "$DOTFILES_DIR/.editorconfig" "$HOME/.editorconfig"
-create_symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
-create_symlink "$DOTFILES_DIR/.gitignore" "$HOME/.gitignore"
-create_symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-create_symlink "$DOTFILES_DIR/.zprofile" "$HOME/.zprofile"
-create_symlink "$DOTFILES_DIR/settings.json" "$VSCODE_DIR/settings.json"
+mise install --yes

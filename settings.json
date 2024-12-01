@@ -1,51 +1,26 @@
 {
 	"window.commandCenter": false,
-	"breadcrumbs.enabled": false,
+	"breadcrumbs.enabled": true,
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"editor.cursorStyle": "line-thin",
-	"editor.fontFamily": "'Monaspace Neon', monospace",
-	"editor.fontSize": 13,
+	"editor.fontFamily": "'Monaspace Argon', monospace",
+	"editor.fontSize": 14,
+	"editor.tabSize": 2,
 	"editor.fontLigatures": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.lineNumbers": "relative",
 	"editor.minimap.enabled": false,
+	"editor.formatOnSave": false,
+	"editor.insertSpaces": false,
 	"editor.stickyScroll.enabled": false,
 	"editor.guides.indentation": true,
+	"diffEditor.diffAlgorithm": "advanced",
+	"diffEditor.experimental.showMoves": true,
 	"workbench.activityBar.location": "hidden",
 	"workbench.editor.editorActionsLocation": "hidden",
+	"workbench.colorTheme": "Experimental Dark",
 	"workbench.layoutControl.enabled": false,
-	"workbench.colorTheme": "Kanagawa Dragon",
-	"workbench.colorCustomizations": {
-		"titleBar.activeBackground": "#181616",
-		"titleBar.inactiveBackground": "#181616",
-		"statusBar.background": "#181616",
-		"statusBar.border": "#282727",
-		"sideBar.border": "#282727",
-		"scrollbar.shadow": "#181616"
-	},
-	"[go]": {
-		"editor.defaultFormatter": "golang.go"
-	},
-	"[rust]": {
-		"editor.defaultFormatter": "rust-lang.rust-analyzer"
-	},
-	"[toml]": {
-		"editor.defaultFormatter": "tamasfe.even-better-toml"
-	},
-	"[proto3]": {
-		"editor.defaultFormatter": "zxh404.vscode-proto3"
-	},
-	"[shellscript]": {
-		"editor.defaultFormatter": "foxundermoon.shell-format"
-	},
-	"[dockerfile]": {
-		"editor.defaultFormatter": "foxundermoon.shell-format"
-	},
-	"[sql]": {
-		"editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
-	},
-	"[astro]": {
-		"editor.defaultFormatter": "astro-build.astro-vscode"
-	}
+	"files.autoSave": "afterDelay",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
 }
