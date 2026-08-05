@@ -1,0 +1,10 @@
+# Open terminal editors with Neovim.
+alias vi="nvim"
+alias vim="nvim"
+
+# Display files with syntax highlighting.
+alias cat="bat --paging=never"
+
+# Run Claude using the Singapore timezone.
+alias claude="TZ=Asia/Singapore claude"
+

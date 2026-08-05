@@ -1,59 +1,59 @@
 #!/usr/bin/env bash
-set -e
 
-# Configuration
-DOTFILES_DIR=~/dotfiles
-VSCODE_DIR="$HOME/Library/Application Support/Code/User"
+# Exit on errors, undefined variables, and failed pipelines.
+set -euo pipefail
 
-# Ensure Homebrew is installed
-if ! command -v brew &>/dev/null; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# Define the source directory for managed configuration.
+DOTFILES_DIR="${HOME}/dotfiles"
 
-# Run BrewFile (commented out as in original)
-if [ -f "$DOTFILES_DIR/Brewfile" ]; then
-    brew bundle --file="$DOTFILES_DIR/Brewfile"
-fi
+# Define the VS Code user configuration directory.
+VSCODE_DIR="${HOME}/Library/Application Support/Code/User"
 
-# Function to create symlink with backup
-create_symlink() {
-  local source=$1
-  local target=$2
+# Install missing Homebrew packages without upgrading installed packages.
+brew bundle \
+  --file="${DOTFILES_DIR}/Brewfile" \
+  --no-upgrade
 
-  # Create target directory if it doesn't exist
-  target_dir=$(dirname "$target")
-  if [ ! -d "$target_dir" ]; then
-    echo "Creating directory: $target_dir"
-    mkdir -p "$target_dir"
+# Map managed files to their expected locations.
+links=(
+  "${DOTFILES_DIR}/.zshrc:${HOME}/.zshrc"
+  "${DOTFILES_DIR}/.zprofile:${HOME}/.zprofile"
+  "${DOTFILES_DIR}/.zshenv:${HOME}/.zshenv"
+  "${DOTFILES_DIR}/.aliases:${HOME}/.aliases"
+  "${DOTFILES_DIR}/.gitconfig:${HOME}/.gitconfig"
+  "${DOTFILES_DIR}/.config/git/ignore:${HOME}/.config/git/ignore"
+  "${DOTFILES_DIR}/.tmux.conf:${HOME}/.tmux.conf"
+  "${DOTFILES_DIR}/.editorconfig:${HOME}/.editorconfig"
+  "${DOTFILES_DIR}/.config/nvim:${HOME}/.config/nvim"
+  "${DOTFILES_DIR}/.config/ghostty:${HOME}/.config/ghostty"
+  "${DOTFILES_DIR}/.config/mise:${HOME}/.config/mise"
+)
+
+for entry in "${links[@]}"; do
+  source_path="${entry%%:*}"
+  target_path="${entry##*:}"
+
+  # Reject missing sources instead of creating broken links.
+  if [[ ! -e "${source_path}" ]]; then
+    printf 'Missing source: %s\n' "${source_path}" >&2
+    exit 1
   fi
 
-  # Check if source file exists
-  if [ ! -e "$source" ]; then
-    echo "SKIP: $source"
-    return
+  # Replace the previous backup before moving an existing target.
+  if [[ -e "${target_path}" || -L "${target_path}" ]]; then
+    rm -rf "${target_path}.bak"
+    mv "${target_path}" "${target_path}.bak"
   fi
 
-  # Handle existing files/symlinks
-  if [ -e "$target" ] || [ -L "$target" ]; then
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-      echo "SKIP: $target"
-      return
-    else
-      echo "REPLACE: $target to $target.backup"
-      mv "$target" "$target.backup"
-    fi
-  fi
+  # Create the target directory before linking the source.
+  mkdir -p "$(dirname "${target_path}")"
 
-  # Create symlink
-  echo "CREATE: $source -> $target"
-  ln -sf "$source" "$target"
-}
+  # Link the managed configuration into its expected location.
+  ln -s "${source_path}" "${target_path}"
+done
 
-create_symlink "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
-create_symlink "$DOTFILES_DIR/.alacritty.toml" "$HOME/.alacritty.toml"
-create_symlink "$DOTFILES_DIR/.editorconfig" "$HOME/.editorconfig"
-create_symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
-create_symlink "$DOTFILES_DIR/.gitignore" "$HOME/.gitignore"
-create_symlink "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-create_symlink "$DOTFILES_DIR/.zprofile" "$HOME/.zprofile"
-create_symlink "$DOTFILES_DIR/settings.json" "$VSCODE_DIR/settings.json"
+# Install the development tools declared in the mise configuration.
+mise install --yes
+
+# Suppress the macOS login message in new terminal sessions.
+touch "${HOME}/.hushlogin"

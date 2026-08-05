@@ -1,0 +1,8 @@
+[tools]
+go = "latest"
+lua-language-server = "latest"
+node = "latest"
+pnpm = "latest"
+protoc = "latest"
+rust = "latest"
+uv = "latest"

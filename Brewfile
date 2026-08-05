@@ -1,21 +1,27 @@
-tap "homebrew/bundle"
-tap "homebrew/services"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# New way to see and navigate directory trees
-brew "broot"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Like cURL, but for gRPC
+brew "grpcurl"
+# OpenID Connect authentication plugin for kubectl
+brew "kubelogin"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Platform built on V8 to build network applications
-brew "node"
-# Fast, disk space efficient package manager
-brew "pnpm"
+# Object-relational database system
+brew "postgresql@17", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Terminal multiplexer
 brew "tmux"
+# Program that allows you to count code, quickly
+brew "tokei"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -24,12 +30,12 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# Terminal-based AI coding assistant
+cask "claude-code"
 cask "font-monaspace"
-cask "font-monaspace-nerd-font"
-vscode "esbenp.prettier-vscode"
-vscode "foxundermoon.shell-format"
-vscode "golang.go"
-vscode "metaphore.kanagawa-vscode-color-theme"
-vscode "rust-lang.rust-analyzer"
-vscode "tamasfe.even-better-toml"
-vscode "zxh404.vscode-proto3"
+cask "font-monaspice-nerd-font"
+cask "font-vazirmatn"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"

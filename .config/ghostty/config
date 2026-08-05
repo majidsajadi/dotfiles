@@ -1,0 +1,23 @@
+theme = Black Metal
+
+font-family = MonaspiceNe Nerd Font Mono
+font-size = 16
+
+# Resume the main tmux session when Ghostty starts.
+command = direct:/opt/homebrew/bin/tmux new-session -A -s main
+
+# Keep mouse interactions in the terminal.
+mouse-reporting = false
+
+# Copy selected text only through an explicit command.
+copy-on-select = false
+
+# Hide the scrollbar to preserve terminal space.
+scrollbar = never
+
+# Reserve window and pane shortcuts for tmux.
+keybind = cmd+t=ignore
+keybind = cmd+shift+t=ignore
+keybind = cmd+shift+p=ignore
+keybind = cmd+d=ignore
+keybind = cmd+shift+d=ignore
