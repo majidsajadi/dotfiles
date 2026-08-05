@@ -1,0 +1,10 @@
+[tools]
+go = "latest"
+lua-language-server = "latest"
+node = "latest"
+pnpm = "latest"
+protoc = "latest"
+ruff = "latest"
+rust = "latest"
+uv = "latest"
+ty = "latest"

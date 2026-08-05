@@ -1,22 +1,24 @@
-# .editorconfig - Enforces consistent coding styles across different editors and IDEs.
-
-# Indicates that this is the root .editorconfig file.
-# If this is true, EditorConfig stops searching for config files in parent directories.
+# Stop searching parent directories for additional settings.
 root = true
 
-# Global settings applied to all files.
 [*]
-# Specifies the character set to use. Here, it's UTF-8.
+# Encode text files as UTF-8.
 charset = utf-8
 
-# Sets the indentation style to use. Options: "tab" or "space".
+# Indent files with tabs displayed as two columns.
 indent_style = tab
+tab_width = 2
 
-# Specifies the line-ending style. Options: "lf", "cr", or "crlf".
+# Use Unix line endings.
 end_of_line = lf
 
-# Ensures a newline is added to the end of every file.
+# End text files with a newline.
 insert_final_newline = true
 
-# Removes trailing whitespace on save.
+# Remove trailing whitespace.
 trim_trailing_whitespace = true
+
+[*.{yml,yaml,json}]
+# Indent structured data with two spaces.
+indent_style = space
+indent_size = 2
